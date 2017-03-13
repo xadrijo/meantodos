@@ -24,12 +24,15 @@ export class TodosComponent implements OnInit {
   addTodo(event, todoText){
     var result;
     var newTodo = {
+      _id: '',
       text: todoText.value,
       isCompleted: false
     };
 
     result = this._todoService.saveTodo(newTodo);
-    result.subscribe(x => {
+    
+    result.subscribe(data => {
+      newTodo._id = data._id;
       this.todos.push(newTodo);
       todoText.value = '';
     });
