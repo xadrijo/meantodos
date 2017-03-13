@@ -34,4 +34,40 @@ export class TodosComponent implements OnInit {
     });
   }
 
+  setEditState(todo, state){
+    if(state){
+      todo.isEditMode = state;
+    } else {
+      delete todo.isEditMode;
+    }
+  }
+
+  updateStatus(todo){
+    var _todo = {
+      _id: todo._id,
+      text: todo.text,
+      isCompleted: !todo.isCompleted
+    };
+
+    this._todoService.updateTodo(_todo)
+      .subscribe(data => {
+        todo.isCompleted = !todo.isCompleted;
+      });
+  }
+
+  updateTodoText(event, todo){
+    if(event.which === 13){
+      todo.text = event.target.value;
+      var _todo = {
+        _id: todo._id,
+        text: todo.text,
+        isCompleted: todo.isCompleted
+      };
+
+      this._todoService.updateTodo(_todo)
+        .subscribe(data => {
+          this.setEditState(todo, false);
+        })
+    }
+  }
 }
