@@ -26,4 +26,9 @@ export class TodoService {
       .map(res => res.json());
   }
 
+  deleteTodo(id){
+    return this._http.delete('http://localhost:3000/api/v1/todo/'+id)
+      .map(res => res.json());
+  }
+
 }
