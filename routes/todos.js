@@ -47,7 +47,7 @@ router.post('/todo', function(req, res, next){
 });
 
 // Update Todo
-router.put('/todo', function(req, res, next){
+router.put('/todo/:id', function(req, res, next){
     var todo = req.body;
     var updObj = {};
 
@@ -78,7 +78,7 @@ router.put('/todo', function(req, res, next){
 });
 
 // Delete Todo
-router.delete('/todo', function(req, res, next){
+router.delete('/todo/:id', function(req, res, next){
     db.todos.remove({
         _id: mongojs.ObjectId(req.params.id)
     }, '', function(err, result){
